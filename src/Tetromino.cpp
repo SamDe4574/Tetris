@@ -1,0 +1,197 @@
+#include "Tetromino.h"
+
+Tetromino::Tetromino(Type type): type_(type), x_(10 / 2 - 4 / 2), y_(0), angle_(0){}
+
+void Tetromino::render(SDL_Renderer *renderer)
+{
+	switch (type_)
+	{
+	case Tetromino::I:
+		SDL_SetRenderDrawColor(renderer, 0xff, 0x00, 0x00, 0xff); // RGBA - HEX >> DEC
+		break;
+	case Tetromino::J:
+		SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0x00, 0xff);
+		break;
+	case Tetromino::L:
+		SDL_SetRenderDrawColor(renderer, 0xff, 0x00, 0xff, 0xff);
+		break;
+	case Tetromino::O:
+		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xff, 0xff);
+		break;
+	case Tetromino::S:
+		SDL_SetRenderDrawColor(renderer, 0x00, 0xff, 0xff, 0xff);
+		break;
+	case Tetromino::T:
+		SDL_SetRenderDrawColor(renderer, 0xbf, 0xff, 0x00, 0xff);
+		break;
+	case Tetromino::Z:
+		SDL_SetRenderDrawColor(renderer, 0xff, 0xa5, 0x00, 0xff);
+		break;
+	};
+
+	for (auto x = 0; x < 4; x++)
+		for (auto y = 0; y < 4; y++)
+			if (isBlock(x, y))
+			{
+				SDL_Rect rect{ (x + x_) * 720 / 2 / 10 + 1, (y + y_) * 720 / 2 / 10 + 1, 720 / 2 / 10 - 2, 720 / 2 / 10 - 2};
+				SDL_RenderFillRect(renderer, &rect);
+
+			}
+}
+
+void Tetromino::move(int dx, int dy)
+{
+	x_ += dx;
+	y_ += dy;
+}
+
+void Tetromino::rotate()
+{
+	++angle_;
+	angle_ %= 4;
+}
+
+bool Tetromino::isBlock(int x, int y) const
+{
+	static const char *Shapes[][4] =
+	{
+		{
+			" *  "
+			" *  "
+			" *  "
+			" *  ",
+			"    "
+			"****"
+			"    "
+			"    ",
+			"  * "
+			"  * "
+			"  * "
+			"  * ",
+			"    "
+			"    "
+			"****"
+			"    ",
+		},
+		{
+			"  * "
+			"  * "
+			" ** "
+			"    ",
+			"*   "
+			"*** "
+			"    "
+			"    ",
+			" ** "
+			" *  "
+			" *  "
+			"    ",
+			"    "
+			"*** "
+			"  * "
+			"    ",
+		},
+		{
+			" *  "
+			" *  "
+			" ** "
+			"    ",
+			"    "
+			"*** "
+			"*   "
+			"    ",
+			" ** "
+			"  * "
+			"  * "
+			"    ",
+			"    "
+			"   *"
+			" ***"
+			"    ",
+		},
+		{
+			"    "
+			" ** "
+			" ** "
+			"    ",
+			"    "
+			" ** "
+			" ** "
+			"    ",
+			"    "
+			" ** "
+			" ** "
+			"    ",
+			"    "
+			" ** "
+			" ** "
+			"    ",
+		},
+		{
+			"  * "
+			" ** "
+			" *  "
+			"    ",
+			"    "
+			"**  "
+			" ** "
+			"    ",
+			"  * "
+			" ** "
+			" *  "
+			"    ",
+			"    "
+			"**  "
+			" ** "
+			"    ",
+		},
+		{
+			" *  "
+			" ** "
+			" *  "
+			"    ",
+			"    "
+			"*** "
+			" *  "
+			"    ",
+			" *  "
+			"**  "
+			" *  "
+			"    ",
+			" *  "
+			"*** "
+			"    "
+			"    ",
+		},
+		{
+			" *  "
+			" ** "
+			"  * "
+			"    ",
+			"    "
+			" ** "
+			"**  "
+			"    ",
+			" *  "
+			" ** "
+			"  * "
+			"    ",
+			"    "
+			" ** "
+			"**  "
+			"    ",
+		},
+	};
+
+	return Shapes[type_][angle_][x + y * 4] == '*';
+}
+
+int Tetromino::x() const
+{
+	return x_;
+}
+
+int Tetromino::y() const
+{
+	return y_;
+}
