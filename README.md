@@ -63,4 +63,4 @@ Program is divided into three classes.
 2. The project demonstrates an understanding of C++ functions and control structures.- src/main.cpp:14:15
 3. The project uses destructors appropriately. - src/Game.cpp:38
 4. Classes encapsulate behavior  - ./src/Game.hpp/ - ./src/Tetromino.hpp
-5. The project makes use of references in function declarations  ./src/Matrix.cpp:43, ./src/figure.hpp:23
+5. The project makes use of references in function declarations  ./src/Matrix.cpp:43.
