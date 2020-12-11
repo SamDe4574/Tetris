@@ -3,8 +3,8 @@
 
 #include <vector>
 #include "SDL.h"
-#include "Tetromino.h";
-#include "Matrix.h";
+#include "Tetromino.h"
+#include "Matrix.h"
 
 class Game {
 public:
@@ -23,16 +23,14 @@ private:
     SDL_Renderer* sdl_renderer_;
     Tetromino tetromino_;
     Matrix matrix_;
-    const int screen_width;
-    const int screen_height;
     int moveTime_;
-    int dropSpeed;
-    int level;
-    int title_timestamp;
-    int frame_start;
-    int frame_end;
-    int frame_duration;
-    int frame_count;
+    int dropSpeed_;
+    int level_;
+    int title_timestamp_;
+    int frame_start_;
+    int frame_end_;
+    int frame_duration_;
+    int frame_count_;
 
 };
 

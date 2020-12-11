@@ -29,10 +29,10 @@ tetromino_{ static_cast<Tetromino::Type>(rand() % 7) }, moveTime_(SDL_GetTicks()
         std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
     }
 
-    level = 1;
-    dropSpeed = 800;
-    title_timestamp = SDL_GetTicks();
-    frame_count = 0;
+    level_ = 1;
+    dropSpeed_ = 800;
+    title_timestamp_ = SDL_GetTicks();
+    frame_count_ = 0;
 }
 
 Game::~Game() {
@@ -108,7 +108,7 @@ bool Game::UpdateTheGame(int target_frame_duration) {
     Difficulty();
     if (SDL_GetTicks() > moveTime_)
     {
-        moveTime_ += dropSpeed;
+        moveTime_ += dropSpeed_;
         t = tetromino_;
         t.move(0, 1);
         CollisionCheck(t);
@@ -138,64 +138,64 @@ void Game::Difficulty()
     switch (matrix_.score)
     {
     case  200:
-        level = 2;
-        dropSpeed = 720;
+        level_ = 2;
+        dropSpeed_ = 720;
     break;
     case  400:
-        level = 2;
-        dropSpeed = 630;
+        level_ = 2;
+        dropSpeed_ = 630;
         break;
     case  600:
-        level = 3;
-        dropSpeed = 550;
+        level_ = 3;
+        dropSpeed_ = 550;
         break;
     case  800:
-        level = 3;
-        dropSpeed = 470;
+        level_ = 3;
+        dropSpeed_ = 470;
         break;
     case  1000:
-        level = 4;
-        dropSpeed = 380;
+        level_ = 4;
+        dropSpeed_ = 380;
         break;
     case  1200:
-        level = 4;
-        dropSpeed = 300;
+        level_ = 4;
+        dropSpeed_ = 300;
         break;
     case  1400:
-        level = 5;
-        dropSpeed = 220;
+        level_ = 5;
+        dropSpeed_ = 220;
         break;
     case  1600:
-        level = 5;
-        dropSpeed = 130;
+        level_ = 5;
+        dropSpeed_ = 130;
         break;
     case  1800:
-        level = 6;
-        dropSpeed = 100;
+        level_ = 6;
+        dropSpeed_ = 100;
         break;
     case  2000:
-        level = 6;
-        dropSpeed = 80;
+        level_ = 6;
+        dropSpeed_ = 80;
         break;
     case  2200:
-        level = 7;
-        dropSpeed = 70;
+        level_ = 7;
+        dropSpeed_ = 70;
         break;
     case  2400:
-        level = 7;
-        dropSpeed = 50;
+        level_ = 7;
+        dropSpeed_ = 50;
         break;
     case  2600:
-        level = 8;
-        dropSpeed = 30;
+        level_ = 8;
+        dropSpeed_ = 30;
         break;
     case  2800:
-        level = 8;
-        dropSpeed = 20;
+        level_ = 8;
+        dropSpeed_ = 20;
         break;
     case  3000:
-        level = 9;
-        dropSpeed = 10;
+        level_ = 9;
+        dropSpeed_ = 10;
         break;
     }
 
@@ -204,33 +204,33 @@ void Game::Difficulty()
 void Game::RestGame() {
     tetromino_ = Tetromino{ static_cast<Tetromino::Type>(rand() % 7) };
     matrix_ = Matrix();
-    level = 1;
-    dropSpeed = 800;
+    level_ = 1;
+    dropSpeed_ = 800;
     SDL_Delay(500);
 }
 
 void Game::RunWindowTitle(int target_frame_duration) {
-        frame_start = SDL_GetTicks();
+        frame_start_ = SDL_GetTicks();
 
-        frame_end = SDL_GetTicks();
+        frame_end_ = SDL_GetTicks();
 
         // Keep track of how long each loop through the input/update/render cycle
         // takes.
-        frame_count++;
-        frame_duration = frame_end - frame_start;
+        frame_count_++;
+        frame_duration_ = frame_end_ - frame_start_;
 
         // After every second, update the window title.
-        if (frame_end - title_timestamp >= 1000) {
-            UpdateWindowTitle(matrix_.score, frame_count, level);
-            frame_count = 0;
-            title_timestamp = frame_end;
+        if (frame_end_ - title_timestamp_ >= 1000) {
+            UpdateWindowTitle(matrix_.score, frame_count_, level_ );
+            frame_count_ = 0;
+            title_timestamp_ = frame_end_;
         }
 
-        // If the time for this frame is too small (i.e. frame_duration is
+        // If the time for this frame is too small (i.e. frame_duration_ is
         // smaller than the target ms_per_frame), delay the loop to
         // achieve the correct frame rate.
         if (frame_duration < target_frame_duration) {
-            SDL_Delay(target_frame_duration - frame_duration);
+            SDL_Delay(target_frame_duration - frame_duration_);
         }
 }
 
