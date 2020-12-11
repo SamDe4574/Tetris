@@ -3,8 +3,8 @@
 
 #include <vector>
 #include "SDL.h"
-#include "Tetromino.h"
-#include "Matrix.h"
+#include "Tetromino.hpp"
+#include "Matrix.hpp"
 
 class Game {
 public:
@@ -31,6 +31,8 @@ private:
     int frame_end_;
     int frame_duration_;
     int frame_count_;
+    const int screen_width; 
+    const int screen_height;
 
 };
 

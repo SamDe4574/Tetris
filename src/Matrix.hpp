@@ -1,6 +1,6 @@
 #pragma once
 #include "SDL.h"
-#include "Tetromino.h"
+#include "Tetromino.hpp"
 #include <iostream>
 
 class Matrix

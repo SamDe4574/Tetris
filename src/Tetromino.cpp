@@ -1,4 +1,4 @@
-#include "Tetromino.h"
+#include "Tetromino.hpp"
 
 Tetromino::Tetromino(Type type): type_(type), x_(10 / 2 - 4 / 2), y_(0), angle_(0){}
 

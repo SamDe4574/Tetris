@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Game.hpp"
 #include <iostream>
 #include <string>
 
@@ -229,7 +229,7 @@ void Game::RunWindowTitle(int target_frame_duration) {
         // If the time for this frame is too small (i.e. frame_duration_ is
         // smaller than the target ms_per_frame), delay the loop to
         // achieve the correct frame rate.
-        if (frame_duration < target_frame_duration) {
+        if (frame_duration_ < target_frame_duration) {
             SDL_Delay(target_frame_duration - frame_duration_);
         }
 }
